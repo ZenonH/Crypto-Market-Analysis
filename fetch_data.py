@@ -34,7 +34,11 @@ coins = list(all_coins)
 length = len(coins)
 
 error = []
+<<<<<<< HEAD
 print("Fetching Historical Prices\n")
+=======
+
+>>>>>>> 1a6f0ca318eca88dab72a6edb44b5dc5263f9e0f
 for count, coin in enumerate(coins):
     try:
         historical_prices = historical_prices.append(get_coin_data(coin))
@@ -45,6 +49,7 @@ for count, coin in enumerate(coins):
             historical_prices = historical_prices.append(get_coin_data(coin))
         except:
             error.append(coin)
+<<<<<<< HEAD
 
 
     sys.stdout.write("\r" + str(round((count + 1) * 100/ length, 2)) + '% complete')
@@ -59,6 +64,22 @@ historical_prices.to_sql('historical_prices_raw', conn,
                          if_exists = 'replace', index = False)
 conn.close()
 
+=======
+
+
+    sys.stdout.write("\r" + str(round((count + 1) * 100/ length, 2)) + '% complete')
+    sys.stdout.flush()
+
+print()
+
+# Save data to database
+# Note: Any previous data is completely overwritten
+conn = sqlite3.connect('crypto_data.db')
+historical_prices.to_sql('historical_prices', conn, 
+                         if_exists = 'replace', index = False)
+conn.close()
+
+>>>>>>> 1a6f0ca318eca88dab72a6edb44b5dc5263f9e0f
 clear_output()
 if len(error) != 0:
     print("Done. {} coins could not be imported".format(len(error)))
